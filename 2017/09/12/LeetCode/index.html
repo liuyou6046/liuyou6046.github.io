@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="LeetCode227.Basic Calculator 21.java 对于每一个数，都默认一个符号，比如：3+5/2，3的符号是+，5的符号是+，2的符号是/。符号优先级不同：乘除马上操作，得到结果保存；而加减不动。读取字符串，如果当前字符是数字，那么临时保存（注意数字可能是多位的，故需要num=num10+s.charAt(i)-‘0’）。如果当前字符是+，则num入栈；如果当前字符是-，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的博客">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/LeetCode/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="LeetCode227.Basic Calculator 21.java 对于每一个数，都默认一个符号，比如：3+5/2，3的符号是+，5的符号是+，2的符号是/。符号优先级不同：乘除马上操作，得到结果保存；而加减不动。读取字符串，如果当前字符是数字，那么临时保存（注意数字可能是多位的，故需要num=num10+s.charAt(i)-‘0’）。如果当前字符是+，则num入栈；如果当前字符是-，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-11T17:16:55.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的博客">
+<meta name="twitter:description" content="LeetCode227.Basic Calculator 21.java 对于每一个数，都默认一个符号，比如：3+5/2，3的符号是+，5的符号是+，2的符号是/。符号优先级不同：乘除马上操作，得到结果保存；而加减不动。读取字符串，如果当前字符是数字，那么临时保存（注意数字可能是多位的，故需要num=num10+s.charAt(i)-‘0’）。如果当前字符是+，则num入栈；如果当前字符是-，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/12/LeetCode/"/>
+
+
+
+
+
+  <title> | 我的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/LeetCode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyoude">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-12T00:18:48+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="LeetCode"><a href="#LeetCode" class="headerlink" title="LeetCode"></a>LeetCode</h2><h3 id="227-Basic-Calculator-2"><a href="#227-Basic-Calculator-2" class="headerlink" title="227.Basic Calculator 2"></a>227.Basic Calculator 2</h3><p>1.java</p>
+<p>对于每一个数，都默认一个符号，比如：3+5/2，3的符号是+，5的符号是+，2的符号是/。符号优先级不同：乘除马上操作，得到结果保存；而加减不动。读取字符串，如果当前字符是数字，那么临时保存（注意数字可能是多位的，故需要num=num<em>10+s.charAt(i)-‘0’）。如果当前字符是+，则num入栈；如果当前字符是-，则num取负数入栈；如果当前字符是</em>，则取栈顶与该num相乘，入栈；如果当前字符是/，则取栈顶与num相除然后入栈。最后，对栈中元素求和，为最终结果。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public int calculate(String s) &#123;  </div><div class="line">      int re = 0;  </div><div class="line">      Stack&lt;Integer&gt; st = new Stack&lt;&gt;();  </div><div class="line">      char sign = <span class="string">'+'</span>;  </div><div class="line">      int num = 0;  </div><div class="line">      <span class="keyword">for</span>(int i=0;i&lt;s.length();i++)&#123;  </div><div class="line">          char cur = s.charAt(i);  </div><div class="line">          <span class="keyword">if</span>(cur&gt;=<span class="string">'0'</span>&amp;&amp;cur&lt;=<span class="string">'9'</span>)&#123;  </div><div class="line">              num = num*10+(cur-<span class="string">'0'</span>);  </div><div class="line">          &#125;  </div><div class="line">          <span class="keyword">if</span>((cur!=<span class="string">' '</span>&amp;&amp;(cur&lt;<span class="string">'0'</span>||cur&gt;<span class="string">'9'</span>))||i==s.length()-1)&#123;  </div><div class="line">              <span class="keyword">if</span>(sign==<span class="string">'-'</span>)  </div><div class="line">                  st.push(-num);  </div><div class="line">              <span class="keyword">else</span> <span class="keyword">if</span>(sign==<span class="string">'+'</span>)  </div><div class="line">                  st.push(num);  </div><div class="line">              <span class="keyword">else</span> <span class="keyword">if</span>(sign==<span class="string">'*'</span>)  </div><div class="line">                  st.push(st.pop()*num);  </div><div class="line">              <span class="keyword">else</span> <span class="keyword">if</span>(sign==<span class="string">'/'</span>)  </div><div class="line">                  st.push(st.pop()/num);  </div><div class="line">              sign=cur;  </div><div class="line">              num=0;  </div><div class="line">          &#125;  </div><div class="line">      &#125;  </div><div class="line">      <span class="keyword">while</span>(!st.isEmpty())&#123;  </div><div class="line">          re += st.pop();  </div><div class="line">      &#125;  </div><div class="line">      <span class="built_in">return</span> re;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>用两个stack来分别记录当前的结果和操作符(operator), 注意每一次统计当前的operand的时候，要看一下下一位的操作符。如果下一位是high operator(‘+’或’/‘), 就要先把当前的数和操作符都要先push回stack保留数据，如果当前stack不为空且已经有高位运算符在stack的顶部，就先计算一次重新计算当前的数字，再考虑之后的运算。有一种replace all multiple spaces with one space的方法，是s.replaceAll(“\s+”,””), \s 表示的是匹配任意的空白符，包括空格，制表符(Tab)，换行符，中文全角空格等。也可以用更简单的方法，replaceAll(“ +”, “”)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public double calculator(String s) &#123;</div><div class="line">    // delete multiple spaces</div><div class="line">    s = s.trim().replaceAll(<span class="string">" +"</span>, <span class="string">""</span>);</div><div class="line">    char[] arr = s.toCharArray();</div><div class="line">    Stack&lt;Double&gt; res = new Stack&lt;&gt;();</div><div class="line">    Stack&lt;Character&gt; operator = new Stack&lt;&gt;();</div><div class="line">    res.push(0.0);</div><div class="line">    operator.push(<span class="string">'+'</span>);</div><div class="line">    <span class="keyword">for</span>(int i = 0; i &lt; arr.length; i ++) &#123;</div><div class="line">        double val = 0;</div><div class="line">        int j = i;</div><div class="line">        <span class="keyword">while</span>(j &lt; arr.length &amp;&amp; Character.isDigit(arr[j])) &#123;</div><div class="line">            val *= 10;</div><div class="line">            val += arr[j] - <span class="string">'0'</span>;</div><div class="line">            j ++;</div><div class="line">        &#125;</div><div class="line">        //</div><div class="line">        <span class="keyword">if</span>(!operator.isEmpty() &amp;&amp; isHighOp(operator.peek())) &#123;</div><div class="line">            double temp = getValue(res.pop(), val,operator.pop());</div><div class="line">            val = temp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(j &lt; arr.length &amp;&amp; isHighOp(arr[j])) &#123;</div><div class="line">            res.push(val);</div><div class="line">            operator.push(arr[j]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            double temp = getValue(res.pop(), val, operator.pop());</div><div class="line">            res.push(temp);</div><div class="line">            <span class="keyword">if</span>(j &lt; arr.length) operator.push(arr[j]);</div><div class="line">        &#125;</div><div class="line">        i = j;</div><div class="line">    &#125;</div><div class="line">    // notice the format;</div><div class="line">    DecimalFormal df = new DecimalFormat(<span class="string">"#.##"</span>);</div><div class="line">    <span class="built_in">return</span> Double.parseDouble(df.format(res.pop()));</div><div class="line">&#125;</div><div class="line"></div><div class="line">public boolean isHighOp(Character ch) &#123;</div><div class="line">    <span class="built_in">return</span> ch == <span class="string">'*'</span> || ch == <span class="string">'/'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public double getValue(double op1, double op2, Character ch) &#123;</div><div class="line">    <span class="keyword">if</span>(ch == <span class="string">'+'</span>) <span class="built_in">return</span> op1 + op2;</div><div class="line">    <span class="keyword">if</span>(ch == <span class="string">'-'</span>) <span class="built_in">return</span> op1 - op2;</div><div class="line">    <span class="keyword">if</span>(ch == <span class="string">'*'</span>) <span class="built_in">return</span> op1 * op2;</div><div class="line">    <span class="built_in">return</span> op1 / op2;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/11/HTML5/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="liuyoude" />
+          <p class="site-author-name" itemprop="name">liuyoude</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode"><span class="nav-number">1.</span> <span class="nav-text">LeetCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#227-Basic-Calculator-2"><span class="nav-number">1.1.</span> <span class="nav-text">227.Basic Calculator 2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyoude</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    Thème &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
